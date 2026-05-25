@@ -1,26 +1,249 @@
-Act as an expert frontend developer. Create a complete, single-file website (index.html) for a personal study blog. This file must include HTML5, embedded CSS3 (in <style> tags), and JavaScript (in <script> tags) so it is ready to be hosted immediately on GitHub Pages without needing a complex folder structure.
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study With Me: สมุดพกความฝัน</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcf8f2;
+            --text-color: #4a4a4a;
+            --card-bg: #ffffff;
+            --accent-color: #ffb7b2;
+            --accent-secondary: #b5ead7;
+            --header-bg: #ffdac1;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
 
-Here are the specific requirements:
-1. Blog Concept & Theme: 
-   - Title: "Study With Me: สมุดพกความฝัน"
-   - Topic: Study tips, exam prep, stationery reviews, and university inspiration.
-   - Design Style: Pastel aesthetic, soft and clean colors (like light cream, soft blue/pink accents), minimalist layout, modern and highly readable typography for Thai language (use Google Fonts like 'Sarabun' or 'Kanit').
+        [data-theme="dark"] {
+            --bg-color: #2d2d2d;
+            --text-color: #f5f5f5;
+            --card-bg: #3d3d3d;
+            --accent-color: #ff9aa2;
+            --accent-secondary: #85c7b3;
+            --header-bg: #4a3f35;
+            --shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
 
-2. Page Layout & Structure:
-   - Header: Blog name, a cute tagline, and a clean navigation bar (Home, About, Blog, Contact).
-   - Hero Section: A welcoming introduction about the student owner and their journey to their dream university.
-   - Main Content Area (Two Columns on Desktop, Stacked on Mobile):
-     * Left/Center Column (Blog Posts): A responsive grid or list showing 3 placeholder posts with cute modern card designs. 
-       - Post 1: "5 เทคนิคการจำข้อสอบฉบับเร่งด่วน อ่านน้อยแต่จำแม่น"
-       - Post 2: "รีวิวเครื่องเขียนน่ารักๆ เรียนเครียดแค่ไหนก็ใจฟู"
-       - Post 3: "บันทึกการเดินทาง สู่คณะในฝัน (My Inspiration)"
-       Each card must have a placeholder image area, category tag, title, short excerpt, and a "Read More" button.
-     * Right Column (Sidebar): A mini profile widget with a placeholder for an avatar, a short bio, and links to social media.
-   - Footer: Copyright and a sweet closing quote.
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-3. Interactive Features (JavaScript):
-   - Make it fully responsive (mobile-friendly mobile menu if needed).
-   - Implement a simple and clean "Dark Mode / Light Mode" toggle switch in the header.
-   - Add a mini interactive "Study Timer" (Pomodoro style or simple stopwatch) widget in the sidebar to match the study theme.
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-Please provide the entire, fully functional code inside a single code block. Ensure the Thai text is correctly encoded and formatted. Do not use external CSS frameworks like Tailwind or Bootstrap; use pure CSS Grid and Flexbox for custom styling.
+        header {
+            background-color: var(--header-bg);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-content p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero {
+            grid-column: 1 / -1;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-img {
+            height: 150px;
+            background: var(--accent-secondary);
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--header-bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .card-title {
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #4a4a4a;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .widget {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-widget {
+            text-align: center;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .timer-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .timer-controls .btn {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            background: var(--header-bg);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="theme-toggle" id="themeToggle">โหมดมืด 🌙</button>
+        <div class="header-content">
+            <h1>Study With Me: สมุดพกความฝัน</h1>
+            <p>บันทึกการเรียน ไลฟ์สไตล์ และเส้นทางสู่คณะในฝัน ✨</p>
+        </div>
+        <nav>
+            <a href="#">หน้าแรก</a>
+            <a href="#">เกี่ยวกับ

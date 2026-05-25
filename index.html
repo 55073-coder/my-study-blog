@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* ตั้งค่าสีสำหรับโหมดปกติ (Light Mode) */
         :root {
             --bg-color: #fcf8f2;
             --text-color: #4a4a4a;
@@ -18,21 +19,26 @@
             --shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
+        /* ตั้งค่าสีสำหรับโหมดมืด (Dark Mode) ให้เปลี่ยนจริงครบทุกส่วน */
         [data-theme="dark"] {
-            --bg-color: #2d2d2d;
+            --bg-color: #1e1e1e;
             --text-color: #f5f5f5;
-            --card-bg: #3d3d3d;
+            --card-bg: #2d2d2d;
             --accent-color: #ff9aa2;
-            --accent-secondary: #85c7b3;
-            --header-bg: #4a3f35;
-            --shadow: 0 4px 6px rgba(0,0,0,0.2);
+            --accent-secondary: #5f9e89;
+            --header-bg: #3a322a;
+            --shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        html {
+            scroll-behavior: smooth; /* ทำให้เวลาลิงก์กดแล้วจะเลื่อนหน้าจอแบบนุ่มนวล */
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -69,10 +75,16 @@
             text-decoration: none;
             margin: 0 1rem;
             font-weight: 500;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        [data-theme="dark"] nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .theme-toggle {
@@ -86,6 +98,8 @@
             cursor: pointer;
             color: var(--text-color);
             font-family: 'Kanit', sans-serif;
+            font-weight: 500;
+            box-shadow: var(--shadow);
         }
 
         .container {
@@ -100,6 +114,11 @@
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
+            }
+            .theme-toggle {
+                position: static;
+                margin: 1rem auto 0;
+                display: block;
             }
         }
 
@@ -135,7 +154,11 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
-            color: #4a4a4a;
+            color: #333;
+        }
+        
+        [data-theme="dark"] .card-img {
+            color: #fff;
         }
 
         .card-body {
@@ -174,6 +197,10 @@
             border: none;
             cursor: pointer;
         }
+        
+        [data-theme="dark"] .btn {
+            color: #1e1e1e;
+        }
 
         .btn:hover {
             opacity: 0.8;
@@ -194,6 +221,7 @@
 
         .profile-widget {
             text-align: center;
+            border-top: 5px solid var(--accent-secondary);
         }
 
         .avatar {
@@ -236,14 +264,139 @@
         }
     </style>
 </head>
-<body>
-
-    <header>
+<body id="home-section"> <header>
         <button class="theme-toggle" id="themeToggle">โหมดมืด 🌙</button>
         <div class="header-content">
             <h1>Study With Me: สมุดพกความฝัน</h1>
             <p>บันทึกการเรียน ไลฟ์สไตล์ และเส้นทางสู่คณะในฝัน ✨</p>
         </div>
         <nav>
-            <a href="#">หน้าแรก</a>
-            <a href="#">เกี่ยวกับ
+            <a href="#home-section">หน้าแรก</a>
+            <a href="#about-section">เกี่ยวกับฉัน</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h2>ยินดีต้อนรับสู่พื้นที่เติมพลังใจ 📝</h2>
+            <p>สวัสดีทุกคน! บล็อกนี้สร้างขึ้นมาเพื่อบันทึกการเดินทางในการเรียน รีวิวไอเทมเด็ดๆ ที่ช่วยให้การเรียนสนุกขึ้น และแชร์เทคนิคต่างๆ หวังว่าทุกคนจะได้รับแรงบันดาลใจกลับไปวิ่งตามความฝันของตัวเองนะ!</p>
+        </section>
+
+        <main class="blog-posts">
+            <article class="card">
+                <div class="card-img">📖 Image Placeholder</div>
+                <div class="card-body">
+                    <span class="tag">เทคนิคการเรียน</span>
+                    <h3 class="card-title">5 เทคนิคการจำข้อสอบฉบับเร่งด่วน อ่านน้อยแต่จำแม่น</h3>
+                    <p class="card-text">ใกล้สอบแล้วแต่ยังอ่านไม่ทันทำไงดี? มาดูเทคนิคการจำแบบ Active Recall และคัดเฉพาะเนื้อหาเน้นๆ ที่ออกสอบชัวร์ๆ กัน...</p>
+                    <a href="#" class="btn">อ่านต่อ</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-img">✏️ Image Placeholder</div>
+                <div class="card-body">
+                    <span class="tag">รีวิวเครื่องเขียน</span>
+                    <h3 class="card-title">รีวิวเครื่องเขียนน่ารักๆ เรียนเครียดแค่ไหนก็ใจฟู</h3>
+                    <p class="card-text">เปิดกรุเครื่องเขียนโทนพาสเทลที่จะช่วยเพิ่มความอยากอ่านหนังสือเพิ่มขึ้น 200% พิกัดราคาประหยัดฉบับนักเรียน...</p>
+                    <a href="#" class="btn">อ่านต่อ</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-img">🎓 Image Placeholder</div>
+                <div class="card-body">
+                    <span class="tag">แรงบันดาลใจ</span>
+                    <h3 class="card-title">บันทึกการเดินทาง สู่คณะในฝัน (My Inspiration)</h3>
+                    <p class="card-text">เล่าประสบการณ์การเตรียมตัวสอบเข้ามหาวิทยาลัย การตั้งเป้าหมาย และวิธีฮีลใจตัวเองในวันที่เหนื่อยล้า...</p>
+                    <a href="#" class="btn">อ่านต่อ</a>
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar">
+            <div class="widget profile-widget" id="about-section">
+                <div class="avatar">👤</div>
+                <h3>เกี่ยวกับฉัน</h3>
+                <p style="font-size: 0.9rem; margin: 0.5rem 0;">นักเรียนธรรมดาที่มีฝันอันยิ่งใหญ่ ชอบถ่ายรูปและสรุปบทเรียน บล็อกนี้จะพาไปดูชีวิตการเรียนของฉันแบบเจาะลึก!</p>
+                <p><strong>IG:</strong> @yourstyle_study</p>
+            </div>
+
+            <div class="widget">
+                <h3 style="text-align: center; font-size: 1.1rem;">⏱️ นาฬิกาจับเวลาอ่านหนังสือ</h3>
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                <div class="timer-controls">
+                    <button class="btn" id="startBtn">เริ่ม</button>
+                    <button class="btn" id="pauseBtn" style="background: var(--accent-secondary);">พัก</button>
+                    <button class="btn" id="resetBtn" style="background: #e0e0e0;">รีเซ็ต</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>© 2026 Study With Me: สมุดพกความฝัน | "เชื่อมั่นในตัวเอง แล้วลุยไปให้สุดทาง"</p>
+    </footer>
+
+    <script>
+        // ระบบเปลี่ยนโหมดมืด / โหมดสว่าง
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeToggle.textContent = 'โหมดมืด 🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = 'โหมดสว่าง ☀️';
+            }
+        });
+
+        // ระบบนาฬิกาจับเวลา Pomodoro 25 นาที
+        let timer;
+        let timeLeft = 25 * 60; 
+        let isRunning = false;
+
+        const display = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                    } else {
+                        clearInterval(timer);
+                        alert("หมดเวลา 25 นาทีแล้ว! แวะพักสายตาสักนิดนะคนเก่ง");
+                        timeLeft = 25 * 60;
+                        updateDisplay();
+                        isRunning = false;
+                    }
+                }, 1000);
+            }
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            clearInterval(timer);
+            isRunning = false;
+        });
+
+        resetBtn.addEventListener('click', () => {
+            clearInterval(timer);
+            isRunning = false;
+            timeLeft = 25 * 60;
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>
